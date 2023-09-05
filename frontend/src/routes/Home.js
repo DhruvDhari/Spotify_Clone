@@ -2,6 +2,7 @@ import spotify_logo from "../assets/images/logo.svg";
 import IconText from "../components/shared/IconText";
 import { Icon } from "@iconify/react";
 
+
 const HomeComponent=()=>{
     return(
         <>
@@ -39,11 +40,14 @@ const HomeComponent=()=>{
             </div>
 
             <div className="right h-full w-4/5">
-                <div className="navbar w-full">
+                <div className="navbar w-full h-1/10 bg-black ">
+                   
+                </div>
+                <div className="content">
 
 
                 </div>
-                <div className="content"></div>
+
 
             </div>
         </div>
