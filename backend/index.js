@@ -13,11 +13,14 @@ const User=require("./models/User");
 const authRoutes =require("./routes/auth");
 const songRoutes=require("./routes/song");
 const playlistRoutes=require("./routes/playlist");
+const cors =require("cors");
 
 
 
 const app =express();
 const port=8000;
+
+app.use(cors());
 
 app.use(express.json());//this is used to tell ki req.body se joh bhi kuch aae,convert it into json
 
@@ -42,7 +45,7 @@ app.use("/song",songRoutes);
 app.use("/playlist",playlistRoutes);
 
 app.listen(port,()=>{
-    console.log("App is running on port ",port);
+    console.log("App is running on port",port);
 })
 
 
