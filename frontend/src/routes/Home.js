@@ -154,12 +154,7 @@ const PlaylistView=({titleText,cardsData})=>{
 
 
 
-                {/* <Card title={"Peaceful Piano"} description={"Relax and indulge with beautiful piano pieces"} imgUrl={"https://images.unsplash.com/photo-1558021212-51b6ecfa0db9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1783&q=80"}  />
-                <Card title={"Peaceful Piano"} description={"Relax and indulge with beautiful piano pieces"} imgUrl={"https://plus.unsplash.com/premium_photo-1673188701851-a574daea4921?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80"}/>
-                <Card title={"Peaceful Piano"} description={"Relax and indulge with beautiful piano pieces abh likho bht saara description aur dekho ki image ka size pe kuch effect aa rha hai ki nhi bhaaiiii??"} imgUrl={"https://plus.unsplash.com/premium_photo-1673188701851-a574daea4921?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80"}/>
-                <Card title={"Peaceful Piano"} description={"Relax and indulge with beautiful piano pieces"} imgUrl={"https://plus.unsplash.com/premium_photo-1673188701851-a574daea4921?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80"}/>
-                <Card title={"Peaceful Piano"} description={"Relax and indulge with beautiful piano pieces"} imgUrl={"https://plus.unsplash.com/premium_photo-1673188701851-a574daea4921?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80"}/>
-                 */}
+                
             </div>
         </div>
     );
