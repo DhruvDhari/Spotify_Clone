@@ -1,5 +1,6 @@
 import { Icon } from "@iconify/react";
 import TextInput from "../components/shared/Textinput";
+import {useCookies} from "react-cookie";
 import PasswordInput from "../components/shared/Passwordinput";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -13,6 +14,8 @@ const SignupComponent = () => {
     const[password,setPassword]=useState("");
     const [firstName, setFirstName] = useState("");
     const[lastName,setLastName]=useState("");
+    const[cookie,setCookie]=useCookies(["token"]);
+
 
     const signUp= async()=>{
         if(email!==confirmEmail){
@@ -20,16 +23,20 @@ const SignupComponent = () => {
             return;
         }
         const data={email,password,username,firstName,lastName};
-        console.log(data);
+        
 
         const response=await makeUnauthenticatedPOSTRequest("/auth/register",data);
 
         if(response && !response.err){
-            console.log(response);
-            alert("sucsoos milgya");
+            
+            const token =response.token;
+            const date=new Date();
+            date.setDate(date.getDate()+30);
+            setCookie("token",token,{path:"/",expires:date})
+            alert("success");
 
         }else{
-            alert("phail hogya");
+            alert("Failed to signup");
         }
     }
 
@@ -45,7 +52,7 @@ const SignupComponent = () => {
         </div>
 
         <TextInput
-          label="Email address "
+          label="Email address"
           placeholder="Enter your email "
           className="my-6"
           value={email}
