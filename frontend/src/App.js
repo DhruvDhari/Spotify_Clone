@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import LoginComponent from "./routes/Login";
 import SignupComponent from "./routes/Signup";
 import HomeComponent from "./routes/Home";
-import { Cookies, useCookies } from "react-cookie";
+import { useCookies } from "react-cookie";
 
 function App() {
   const [cookie, setCookie] = useCookies(["token"]);
