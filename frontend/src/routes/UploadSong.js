@@ -2,6 +2,7 @@ import spotify_logo from "../assets/images/logo.svg";
 import IconText from "../components/shared/IconText";
 import { Icon } from "@iconify/react";
 import TextWithHover from "../components/shared/TextWithHover";
+import TextInput from "../components/shared/Textinput";
 
 
 const UploadSong=()=>{
@@ -66,7 +67,15 @@ const UploadSong=()=>{
                     
                     <div className="text-2xl font-semibold mb-5 mt-5 text-white">
                         Upload Your Music
-                        </div>
+                    </div>
+                    <div className=" w-2/3 flex space-x-3">
+                        <div className="w-1/2"><TextInput/></div>
+                        <div className="w-1/2"> <TextInput/></div>
+                        
+                       
+                    </div>
+                        <TextInput/>
+
                 </div>
 
 
