@@ -4,6 +4,7 @@ import LoginComponent from "./routes/Login";
 import SignupComponent from "./routes/Signup";
 import HomeComponent from "./routes/Home";
 import { useCookies } from "react-cookie";
+import LoggedInHomeComponent from "./routes/LoggedInHome";
 
 function App() {
   const [cookie, setCookie] = useCookies(["token"]);
@@ -13,14 +14,16 @@ function App() {
     <div className="w-screen h-screen ">
       <BrowserRouter>
         {cookie.token ? (
+          //logged in routes
           <Routes>
             <Route path="/" element={<HelloComponent />} />
 
-            <Route path="/home" element={<HomeComponent />} />
+            <Route path="/home" element={<LoggedInHomeComponent/> } />
 
             <Route path="*" element={<Navigate to="/home" />} />
           </Routes>
         ) : (
+          //logged out routes
           <Routes>
             <Route path="/home" element={<HomeComponent />} />
 
