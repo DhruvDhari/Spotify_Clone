@@ -3,10 +3,11 @@ import IconText from "../components/shared/IconText";
 import { Icon } from "@iconify/react";
 import TextWithHover from "../components/shared/TextWithHover";
 import TextInput from "../components/shared/Textinput";
+import CloudinaryUpload from "../components/shared/CloudinaryUpload";
 
 
 const UploadSong=()=>{
-    console.log(window.cloudinary);
+
     return(
         <>
         <div className="h-full w-full flex">
@@ -73,10 +74,15 @@ const UploadSong=()=>{
                         <div className="w-1/2"><TextInput label="Name" labelClassName="text-white"
                         placeholder={"Name"}/></div>
                         <div className="w-1/2"> <TextInput label="Thumbnail" labelClassName="text-white"
-                        placeholder={"Thumbnail"}/></div>
+                        placeholder={"Thumbnail"}/>
+                        </div>
+                       
                         
                        
                     </div>
+                    <div className="pt-3">
+                            <CloudinaryUpload/>
+                        </div>
                      
 
                 </div>
