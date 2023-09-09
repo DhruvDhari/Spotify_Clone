@@ -6,6 +6,7 @@ import TextInput from "../components/shared/Textinput";
 
 
 const UploadSong=()=>{
+    console.log(window.cloudinary);
     return(
         <>
         <div className="h-full w-full flex">
