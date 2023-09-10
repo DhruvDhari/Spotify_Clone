@@ -2,7 +2,7 @@ import { cloudinary_upload_preset } from "../../config.js";
 import {openUploadWidget} from "../../utils/CloudinaryService";
 
 
-const CloudinaryUpload = () => {
+const CloudinaryUpload = ({setUrl,setName}) => {
     const uploadImageWidget = () => {
         let myUploadWidget = openUploadWidget(
             {
@@ -12,7 +12,8 @@ const CloudinaryUpload = () => {
             },
             function (error, result) {
                 if (!error && result.event === "success") {
-                    console.log(result.info.secure_url);
+                    setUrl(result.info.secure_url);
+                    setName(result.info.original_filename);
                     // setUrl(result.info.secure_url);
                     // setName(result.info.original_filename);
                 } else {
