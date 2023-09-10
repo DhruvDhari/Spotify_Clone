@@ -8,7 +8,7 @@ const CloudinaryUpload = () => {
             {
                 cloudName: "dcswinzu2",
                 uploadPreset:cloudinary_upload_preset ,
-                sources: ["local"],
+                sources: ["local","url"],
             },
             function (error, result) {
                 if (!error && result.event === "success") {
