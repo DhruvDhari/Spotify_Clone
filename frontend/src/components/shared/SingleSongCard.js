@@ -1,15 +1,19 @@
 const SingleSongCard = () =>{
     return(
-       <div className="flex">
+       <div className="flex hover:bg-gray-400 hover:bg-opacity-20 hover:cursor-pointer p-2 rounded-sm">
         <div className="w-12 h-12 bg-cover bg-center " style={{
             backgroundImage:`url("https://i.ytimg.com/vi/cwQIcjFVFWg/maxresdefault.jpg")`
         }}>
 
         </div>
-        <div className="text-white flex flex-col justify-center pl-4">
+        <div className="flex w-full ">
+        <div className="text-white flex flex-col justify-center pl-4 w-5/6">
             <div className="">hello</div>
             <div className="text-xs text-gray-400">marshmello</div>
         </div>
+        <div className="w-1/6 flex items-center justify-center text-white">3:44</div>
+        </div>
+        
        </div>
     );
 }
