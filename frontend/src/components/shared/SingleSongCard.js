@@ -8,10 +8,13 @@ const SingleSongCard = () =>{
         </div>
         <div className="flex w-full ">
         <div className="text-white flex flex-col justify-center pl-4 w-5/6">
-            <div className="">hello</div>
-            <div className="text-xs text-gray-400">marshmello</div>
+            <div className="cursor-pointer hover:underline ">hello</div>
+            <div className="text-xs text-gray-400 cursor-pointer hover:underline">marshmello</div>
         </div>
-        <div className="w-1/6 flex items-center justify-center text-white">3:44</div>
+        <div className="w-1/6 flex items-center justify-center text-gray-400 text-sm">
+            <div>3:44</div>
+            {/* <div className="text-gray flex items-center justify-center pl-2 ">...</div> */}
+            </div>
         </div>
         
        </div>

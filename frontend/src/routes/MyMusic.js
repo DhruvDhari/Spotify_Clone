@@ -66,8 +66,20 @@ const MyMusic=()=>{
                    
                 </div>
 
-                <div className="content p-8 pt-0 overflow-auto">
+                <div className="content p-8 overflow-auto">
+
+                    <div className="text-white text-xl font-semibold pb-4 pl-2">My Songs</div>
+
+                    <div className="space-y-2 overflow-auto">
                     <SingleSongCard/>
+                    <SingleSongCard/>
+                    <SingleSongCard/>
+                    <SingleSongCard/>
+                    <SingleSongCard/>
+                    <SingleSongCard/>
+                    <SingleSongCard/>
+                    </div>
+                    
                 </div>
 
 
