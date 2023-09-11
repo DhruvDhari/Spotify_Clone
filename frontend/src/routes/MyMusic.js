@@ -2,6 +2,7 @@ import spotify_logo from "../assets/images/logo.svg";
 import IconText from "../components/shared/IconText";
 import { Icon } from "@iconify/react";
 import TextWithHover from "../components/shared/TextWithHover";
+import SingleSongCard from "../components/shared/SingleSongCard";
 
 
 
@@ -17,10 +18,10 @@ const MyMusic=()=>{
                 </div>
 
                 <div className="py-4">
-                <IconText iconName={"material-symbols:home"} displayText={"Home"} active />
+                <IconText iconName={"material-symbols:home"} displayText={"Home"} />
                 <IconText iconName={"material-symbols:search-rounded"} displayText={"Search"}/>
                 <IconText iconName={"icomoon-free:books"} displayText={"Library"}/>
-                <IconText iconName={"material-symbols:library-music-sharp"} displayText={"My Music"}/>
+                <IconText iconName={"material-symbols:library-music-sharp"} displayText={"My Music"}  active/>
                 </div>
 
                 <div className="pt-4">
@@ -34,7 +35,7 @@ const MyMusic=()=>{
                 <div className="text-white border border-gray-100 w-2/5 flex px-2 py-1 rounded-full items-center justify-center hover:border-white cursor-pointer"  >
                     <Icon icon="carbon:earth-europe-africa"/>
                 <div className="ml-2 text-sm font-semibold">
-                English 
+                English
                 </div>
                 </div>
                 </div>
@@ -64,7 +65,10 @@ const MyMusic=()=>{
                  
                    
                 </div>
-                
+
+                <div className="content p-8 pt-0 overflow-auto">
+                    <SingleSongCard/>
+                </div>
 
 
             </div>
