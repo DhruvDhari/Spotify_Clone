@@ -1,22 +1,42 @@
 import spotify_logo from "../assets/images/logo.svg";
 import IconText from "../components/shared/IconText";
 import { Icon } from "@iconify/react";
+import {Howl,Howler} from "howler";
 import TextWithHover from "../components/shared/TextWithHover";
 import SingleSongCard from "../components/shared/SingleSongCard";
-
-
-const songData=[
-    {
-        thumbnail:"https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bXVzaWN8ZW58MHx8MHx8fDA%3D&w=1000&q=80", 
-        name:"Happier",
-        artist:"Ed Sheeran"
-}
-];
-
+import { useEffect, useState } from "react";
+import { makeAuthenticatedGETRequest } from "../utils/serverHelpers";
 
 const MyMusic=()=>{
 
+    const[songData,setSongData]=useState([]);
+
+    const[soundPlayed,setSoundPlayed] = useState(null);
+
+    const playSound =(songSrc)=>{
+        if(soundPlayed){
+            soundPlayed.stop();
+        }
+        let sound=new Howl({
+            src:[songSrc],
+            html5:true
+        });
+        setSoundPlayed(sound)
+
+
+        sound.play();
+        console.log(sound);
+    };
     
+
+    useEffect(()=>{
+        const getData=async ()=>{
+            const response=await makeAuthenticatedGETRequest("/song/get/mysongs");
+            setSongData(response.data);
+        };
+        getData();
+       
+    },[]);
 
     return(
         <>
@@ -82,7 +102,7 @@ const MyMusic=()=>{
 
                     <div className="space-y-2 overflow-auto">
                     {songData.map((item)=>{
-                        return <SingleSongCard info={item} />
+                        return <SingleSongCard info={item} playSound={playSound} />
                     })}
                     </div>
                     
