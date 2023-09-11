@@ -5,8 +5,18 @@ import TextWithHover from "../components/shared/TextWithHover";
 import SingleSongCard from "../components/shared/SingleSongCard";
 
 
+const songData=[
+    {
+        thumbnail:"https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bXVzaWN8ZW58MHx8MHx8fDA%3D&w=1000&q=80", 
+        name:"Happier",
+        artist:"Ed Sheeran"
+}
+];
+
 
 const MyMusic=()=>{
+
+    
 
     return(
         <>
@@ -71,13 +81,9 @@ const MyMusic=()=>{
                     <div className="text-white text-xl font-semibold pb-4 pl-2">My Songs</div>
 
                     <div className="space-y-2 overflow-auto">
-                    <SingleSongCard/>
-                    <SingleSongCard/>
-                    <SingleSongCard/>
-                    <SingleSongCard/>
-                    <SingleSongCard/>
-                    <SingleSongCard/>
-                    <SingleSongCard/>
+                    {songData.map((item)=>{
+                        return <SingleSongCard info={item} />
+                    })}
                     </div>
                     
                 </div>
