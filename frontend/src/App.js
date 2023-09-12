@@ -7,10 +7,12 @@ import { useCookies } from "react-cookie";
 import LoggedInHomeComponent from "./routes/LoggedInHome";
 import UploadSong from "./routes/UploadSong";
 import MyMusic from "./routes/MyMusic";
+import songContext from "./context/songContext";
+import { useState } from "react";
 
 function App() {
+  const[currentSong,setCurrentSong]=useState(null);
   const [cookie, setCookie] = useCookies(["token"]);
-  console.log(cookie.token);
 
   return (
     <div className="w-screen h-screen ">
@@ -18,15 +20,16 @@ function App() {
         {cookie.token ? (
           //logged in routes
           <Routes>
-            <Route path="/" element={<HelloComponent />} />
+            <songContext.Provider value={{currentSong,setCurrentSong}}>
+              <Route path="/" element={<HelloComponent />} />
 
-            <Route path="/home" element={<LoggedInHomeComponent/> } />
+              <Route path="/home" element={<LoggedInHomeComponent />} />
 
-            <Route path="/uploadSong" element={ <UploadSong/> }/>
-            <Route path="/mymusic" element={ <MyMusic/> }/>
+              <Route path="/uploadSong" element={<UploadSong />} />
+              <Route path="/mymusic" element={<MyMusic />} />
 
-
-            <Route path="*" element={<Navigate to="/home" />} />
+              <Route path="*" element={<Navigate to="/home" />} />
+            </songContext.Provider>
           </Routes>
         ) : (
           //logged out routes
@@ -38,7 +41,6 @@ function App() {
             <Route path="/signup" element={<SignupComponent />} />
 
             <Route path="*" element={<Navigate to="/login" />} />
-
           </Routes>
         )}
       </BrowserRouter>
