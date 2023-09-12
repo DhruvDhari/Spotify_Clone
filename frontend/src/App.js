@@ -19,8 +19,9 @@ function App() {
       <BrowserRouter>
         {cookie.token ? (
           //logged in routes
-          <Routes>
+         
             <songContext.Provider value={{currentSong,setCurrentSong}}>
+               <Routes>
               <Route path="/" element={<HelloComponent />} />
 
               <Route path="/home" element={<LoggedInHomeComponent />} />
@@ -29,8 +30,9 @@ function App() {
               <Route path="/mymusic" element={<MyMusic />} />
 
               <Route path="*" element={<Navigate to="/home" />} />
+              </Routes>
             </songContext.Provider>
-          </Routes>
+          
         ) : (
           //logged out routes
           <Routes>

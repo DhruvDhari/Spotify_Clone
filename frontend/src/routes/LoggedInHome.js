@@ -64,7 +64,10 @@ const spotifyPlaylistsCardData = [
 const LoggedInHomeComponent=()=>{
     return(
         <>
-        <div className="h-full w-full flex">
+        <div className="h-full w-full bg-app-black">
+
+            <div className="h-9/10 w-full flex">
+
             <div className="left h-full w-1/5 bg-black flex flex-col justify-between pb-10">
                 <div>
                 <div className="logoDiv p-6">
@@ -105,7 +108,7 @@ const LoggedInHomeComponent=()=>{
                         <TextWithHover displayText={"Premium"}/>
                     <TextWithHover displayText={"Support"}/>
                     <TextWithHover displayText={"Download"}/>
-                    <div className="h-1/2 border border-white "></div>
+                    <div className="h-1/2 border-r border-white "></div>
                         </div>
                     
                     <div className="w-1/3 flex justify-around h-full items-center">
@@ -125,6 +128,23 @@ const LoggedInHomeComponent=()=>{
                     <PlaylistView titleText="Sound of India" cardsData={focusCardsData} />
                 </div>
 
+
+            </div>
+            </div>
+            <div className="w-full h-1/10 bg-black bg-opacity-30 text-white flex px-2 items-center">
+
+                <div className="w-1/4 flex items-center">
+                <img src="" alt="phi" className="h-14 w-14 rounded " />
+                <div className="pl-3">
+                    <div className="text-sm hover:underline cursor-pointer">track1</div>
+                    <div className="text-xs text-gray-500 hover:underline cursor-pointer">ed sheeron</div>
+                </div>
+                </div>
+                <div className="w-1/2 flex justify-center ">
+                </div>
+                <div className="w-1/4 flex justify-end">
+                </div>
+                
 
             </div>
         </div>
