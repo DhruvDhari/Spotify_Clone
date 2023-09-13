@@ -3,7 +3,7 @@ import IconText from "../components/shared/IconText";
 import { Icon } from "@iconify/react";
 import TextWithHover from "../components/shared/TextWithHover";
 import {Howl,Howler} from "howler";
-import { Children, useContext, useState } from "react";
+import { Children, useContext, useEffect, useState } from "react";
 import songContext from "../context/songContext";
 
 
@@ -12,10 +12,24 @@ const LoggedInContainer=({children})=>{
     const [soundPlayed,setSoundPlayed]=useState(null);const[isPaused,setIsPaused]=useState(true);
 
     const {currentSong,setCurrentSong}=useContext(songContext);
+
+    useEffect(()=>{
+
+        if(!currentSong){
+            return;
+        }
+        changeSong(currentSong.track);
+
+    },[currentSong])
   
+const playSound=()=>{
+    if (!soundPlayed){
+        return;
+    }
+    soundPlayed.play();
+};
 
-
-    const playSound =(songSrc)=>{
+    const changeSong =(songSrc)=>{
         if(soundPlayed){
             soundPlayed.stop();
         }
@@ -25,6 +39,7 @@ const LoggedInContainer=({children})=>{
         });
         setSoundPlayed(sound)
         sound.play();
+        setIsPaused(false);
        
     };
 
@@ -34,7 +49,7 @@ const LoggedInContainer=({children})=>{
 
     const togglePlayPause=()=>{
         if(isPaused){
-            playSound(currentSong.track);
+            playSound();
 
             setIsPaused(false);
         }else{
@@ -56,10 +71,10 @@ const LoggedInContainer=({children})=>{
                 </div>
 
                 <div className="py-4">
-                <IconText iconName={"material-symbols:home"} displayText={"Home"} active />
+                <IconText iconName={"material-symbols:home"} displayText={"Home"} active targetLink={"/home"} />
                 <IconText iconName={"material-symbols:search-rounded"} displayText={"Search"}/>
                 <IconText iconName={"icomoon-free:books"} displayText={"Library"}/>
-                <IconText iconName={"material-symbols:library-music-sharp"} displayText={"My Music"}/>
+                <IconText iconName={"material-symbols:library-music-sharp"} displayText={"My Music"} targetLink={"/mymusic"}/>
                 </div>
 
                 <div className="pt-4">

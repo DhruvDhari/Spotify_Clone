@@ -1,7 +1,9 @@
 import { Icon } from "@iconify/react";
+import { Link } from "react-router-dom";
 
-const IconText=({iconName,displayText,active})=>{
+const IconText=({iconName,displayText,active,targetLink})=>{
     return(
+        <Link to={targetLink} className="block" >
         <div className="flex items-center justify-start cursor-pointer ">
 
             <div className="py-2 px-3">
@@ -12,6 +14,7 @@ const IconText=({iconName,displayText,active})=>{
             </div>
         
         </div>
+        </Link>
     );
 }
 
