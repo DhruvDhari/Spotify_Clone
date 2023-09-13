@@ -3,14 +3,18 @@ import IconText from "../components/shared/IconText";
 import { Icon } from "@iconify/react";
 import TextWithHover from "../components/shared/TextWithHover";
 import {Howl,Howler} from "howler";
-import { Children, useState } from "react";
+import { Children, useContext, useState } from "react";
+import songContext from "../context/songContext";
 
 
 const LoggedInContainer=({children})=>{
 
-    const [soundPlayed,setSoundPlayed]=useState(null);
+    const [soundPlayed,setSoundPlayed]=useState(null);const[isPaused,setIsPaused]=useState(true);
 
-    const[isPaused,setIsPaused]=useState(true);
+    const {currentSong,setCurrentSong}=useContext(songContext);
+  
+
+
     const playSound =(songSrc)=>{
         if(soundPlayed){
             soundPlayed.stop();
@@ -30,7 +34,7 @@ const LoggedInContainer=({children})=>{
 
     const togglePlayPause=()=>{
         if(isPaused){
-            playSound("https://res.cloudinary.com/dcswinzu2/video/upload/v1694448900/vsnd8tkem8iyvhdddf0b.mp3");
+            playSound(currentSong.track);
 
             setIsPaused(false);
         }else{
@@ -43,7 +47,7 @@ const LoggedInContainer=({children})=>{
         <>
         <div className="h-full w-full bg-app-black">
 
-            <div className="h-9/10 w-full flex">
+            <div className={`${currentSong?"h-9/10":"h-full"} w-full flex`}>
 
             <div className="left h-full w-1/5 bg-black flex flex-col justify-between pb-10">
                 <div>
@@ -106,13 +110,17 @@ const LoggedInContainer=({children})=>{
 
             </div>
             </div>
-            <div className="w-full h-1/10 bg-black bg-opacity-30 text-white flex px-2 items-center">
+
+            {
+                currentSong &&(
+
+                    <div className=" w-full  bg-black bg-opacity-30 text-white flex px-2 items-center">
 
                 <div className="w-1/4 flex items-center ">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzvHWBZ0aJjE-IWDh1fRsah82iytuxoGX1e689eDOm&s" alt="phi" className="h-14 w-14 rounded " />
+                <img src={currentSong.thumbnail} alt="phi" className="h-14 w-14 rounded " />
                 <div className="pl-3">
-                    <div className="text-sm hover:underline cursor-pointer">track1</div>
-                    <div className="text-xs text-gray-500 hover:underline cursor-pointer">ed sheeron</div>
+                    <div className="text-sm hover:underline cursor-pointer">{currentSong.name}</div>
+                    <div className="text-xs text-gray-500 hover:underline cursor-pointer">{currentSong.artist.firstName+" "+currentSong.artist.lastName}</div>
                 </div>
                 </div>
                 <div className="w-1/2 flex h-full justify-center flex-col items-center">
@@ -130,6 +138,7 @@ const LoggedInContainer=({children})=>{
                 
 
             </div>
+                )}
         </div>
         </>
     );

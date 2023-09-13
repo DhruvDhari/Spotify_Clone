@@ -1,8 +1,3 @@
-import spotify_logo from "../assets/images/logo.svg";
-import IconText from "../components/shared/IconText";
-import { Icon } from "@iconify/react";
-import { Howl, Howler } from "howler";
-import TextWithHover from "../components/shared/TextWithHover";
 import SingleSongCard from "../components/shared/SingleSongCard";
 import { useEffect, useState } from "react";
 import { makeAuthenticatedGETRequest } from "../utils/serverHelpers";
@@ -21,7 +16,7 @@ const MyMusic = () => {
             },[]);
 
   return (
-    <LoggedInContainer>
+    <LoggedInContainer >
       <div className="text-white text-xl font-semibold pb-4 pl-2 pt-8">My Songs</div>
 
       <div className="space-y-2 overflow-auto">
