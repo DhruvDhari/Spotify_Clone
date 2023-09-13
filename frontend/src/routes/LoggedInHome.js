@@ -2,6 +2,8 @@ import spotify_logo from "../assets/images/logo.svg";
 import IconText from "../components/shared/IconText";
 import { Icon } from "@iconify/react";
 import TextWithHover from "../components/shared/TextWithHover";
+import {Howl,Howler} from "howler";
+import { useState } from "react";
 
 const focusCardsData = [
     {
@@ -62,6 +64,38 @@ const spotifyPlaylistsCardData = [
 
 
 const LoggedInHomeComponent=()=>{
+
+    const [soundPlayed,setSoundPlayed]=useState(null);
+
+    const[isPaused,setIsPaused]=useState(true);
+    const playSound =(songSrc)=>{
+        if(soundPlayed){
+            soundPlayed.stop();
+        }
+        let sound=new Howl({
+            src:[songSrc],
+            html5:true
+        });
+        setSoundPlayed(sound)
+        sound.play();
+       
+    };
+
+    const pauseSound=()=>{
+        soundPlayed.pause();
+    };
+
+    const togglePlayPause=()=>{
+        if(isPaused){
+            playSound("https://res.cloudinary.com/dcswinzu2/video/upload/v1694448900/vsnd8tkem8iyvhdddf0b.mp3");
+
+            setIsPaused(false);
+        }else{
+            pauseSound();
+            setIsPaused(true);
+        }
+    };
+
     return(
         <>
         <div className="h-full w-full bg-app-black">
@@ -133,14 +167,22 @@ const LoggedInHomeComponent=()=>{
             </div>
             <div className="w-full h-1/10 bg-black bg-opacity-30 text-white flex px-2 items-center">
 
-                <div className="w-1/4 flex items-center">
-                <img src="" alt="phi" className="h-14 w-14 rounded " />
+                <div className="w-1/4 flex items-center ">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzvHWBZ0aJjE-IWDh1fRsah82iytuxoGX1e689eDOm&s" alt="phi" className="h-14 w-14 rounded " />
                 <div className="pl-3">
                     <div className="text-sm hover:underline cursor-pointer">track1</div>
                     <div className="text-xs text-gray-500 hover:underline cursor-pointer">ed sheeron</div>
                 </div>
                 </div>
-                <div className="w-1/2 flex justify-center ">
+                <div className="w-1/2 flex h-full justify-center flex-col items-center">
+                    <div className="flex w-1/3 justify-between items-center">
+                        <Icon icon="ph:shuffle-fill"  fontSize={30} className="cursor-pointer text-gray-500 hover:text-white"/>
+                        <Icon icon="mdi:skip-previous-outline"  fontSize={30} className="cursor-pointer text-gray-500 hover:text-white"/>
+                        <Icon icon={isPaused?"ic:baseline-play-circle":"ic:baseline-pause-circle"}  fontSize={50} className="cursor-pointer text-gray-500 hover:text-white" onClick={togglePlayPause}/>
+                        <Icon icon="mdi:skip-next-outline"  fontSize={30} className="cursor-pointer text-gray-500 hover:text-white"/>
+                        <Icon icon="ic:twotone-repeat"  fontSize={30} className="cursor-pointer text-gray-500 hover:text-white"/>
+                    </div>
+                    <div className="">progress bar</div>
                 </div>
                 <div className="w-1/4 flex justify-end">
                 </div>

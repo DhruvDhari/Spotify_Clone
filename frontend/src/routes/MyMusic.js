@@ -25,7 +25,7 @@ const MyMusic=()=>{
 
 
         sound.play();
-        console.log(sound);
+       
     };
     
 
