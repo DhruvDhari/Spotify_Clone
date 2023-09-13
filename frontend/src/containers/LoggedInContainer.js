@@ -3,24 +3,30 @@ import IconText from "../components/shared/IconText";
 import { Icon } from "@iconify/react";
 import TextWithHover from "../components/shared/TextWithHover";
 import {Howl,Howler} from "howler";
-import { Children, useContext, useEffect, useState } from "react";
+import { Children, useContext, useEffect, useLayoutEffect, useRef, useState } from "react";
 import songContext from "../context/songContext";
+// import { useNavigate } from "react-router-dom";
 
 
-const LoggedInContainer=({children})=>{
+const LoggedInContainer=({children,curActiveScreen})=>{
+    // const navigate=useNavigate();
+    const {currentSong,setCurrentSong,soundPlayed,setSoundPlayed,isPaused,setIsPaused}=useContext(songContext);
 
-    const [soundPlayed,setSoundPlayed]=useState(null);const[isPaused,setIsPaused]=useState(true);
+    const firstUpdate=useRef(true);
 
-    const {currentSong,setCurrentSong}=useContext(songContext);
+    useLayoutEffect(()=>{
 
-    useEffect(()=>{
-
+        if(firstUpdate.current){
+            firstUpdate.current=false;
+            return;
+        }
         if(!currentSong){
             return;
         }
+        
         changeSong(currentSong.track);
 
-    },[currentSong])
+    },[currentSong && currentSong.track]);
   
 const playSound=()=>{
     if (!soundPlayed){
@@ -71,10 +77,10 @@ const playSound=()=>{
                 </div>
 
                 <div className="py-4">
-                <IconText iconName={"material-symbols:home"} displayText={"Home"} active targetLink={"/home"} />
-                <IconText iconName={"material-symbols:search-rounded"} displayText={"Search"}/>
-                <IconText iconName={"icomoon-free:books"} displayText={"Library"}/>
-                <IconText iconName={"material-symbols:library-music-sharp"} displayText={"My Music"} targetLink={"/mymusic"}/>
+                <IconText iconName={"material-symbols:home"} displayText={"Home"} active={curActiveScreen==="home"} targetLink={"/home"} />
+                <IconText iconName={"material-symbols:search-rounded"} displayText={"Search"} active={curActiveScreen==="search"}/>
+                <IconText iconName={"icomoon-free:books"} displayText={"Library"} active={curActiveScreen==="library"}/>
+                <IconText iconName={"material-symbols:library-music-sharp"} displayText={"My Music"} targetLink={"/mymusic"} active={curActiveScreen==="mymusic"}/>
                 </div>
 
                 <div className="pt-4">
@@ -108,7 +114,7 @@ const playSound=()=>{
                         </div>
                     
                     <div className="w-1/3 flex justify-around h-full items-center">
-                    <TextWithHover displayText={"Upload Song "}/>
+                    <TextWithHover displayText={"Upload Song "} />
                     <div className=" bg-white w-10 h-10 flex items-center justify-center rounded-full font-semibold cursor-pointer">
                         DD
                     </div>
