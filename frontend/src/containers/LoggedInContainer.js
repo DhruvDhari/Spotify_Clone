@@ -67,7 +67,6 @@ const playSound=()=>{
     return(
         <>
         <div className="h-full w-full bg-app-black">
-
             <div className={`${currentSong?"h-9/10":"h-full"} w-full flex`}>
 
             <div className="left h-full w-1/5 bg-black flex flex-col justify-between pb-10">
