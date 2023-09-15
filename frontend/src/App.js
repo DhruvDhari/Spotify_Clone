@@ -23,7 +23,7 @@ function App() {
       <BrowserRouter>
         {cookie.token ? (
           //logged in routes
-         
+         //this provider basically helps to create a context that is globally same..
             <songContext.Provider value={{currentSong,setCurrentSong,soundPlayed,setSoundPlayed,isPaused,setIsPaused}}>
                <Routes>
               <Route path="/" element={<HelloComponent />} />
