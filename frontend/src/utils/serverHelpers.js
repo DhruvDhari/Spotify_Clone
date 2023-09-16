@@ -16,6 +16,7 @@ export const makeUnauthenticatedPOSTRequest=async(route,body)=>{
 
 export const makeAuthenticatedPOSTRequest=async(route,body)=>{
     const token =getToken();
+    
     const response=await fetch(backendUrl + route,{
         method:"POST",
         headers:{

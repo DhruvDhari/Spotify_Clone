@@ -7,4 +7,4 @@ exports.getToken=async(email,user)=>{
     return token;
  };
 
- module.exports =exports
+ module.exports =exports;
