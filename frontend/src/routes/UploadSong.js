@@ -22,6 +22,8 @@ const UploadSong=()=>{
         
 
         const data={name,thumbnail,track:playlistUrl};
+
+      
         const response=await makeAuthenticatedPOSTRequest("/song/create",data);
         if(response.err){
             alert("Could not create Song");
