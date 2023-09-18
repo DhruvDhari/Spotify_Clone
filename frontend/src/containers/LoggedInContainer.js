@@ -77,7 +77,7 @@ const playSound=()=>{
 
                 <div className="py-4">
                 <IconText iconName={"material-symbols:home"} displayText={"Home"} active={curActiveScreen==="home"} targetLink={"/home"} />
-                <IconText iconName={"material-symbols:search-rounded"} displayText={"Search"} active={curActiveScreen==="search"}/>
+                <IconText iconName={"material-symbols:search-rounded"} displayText={"Search"} active={curActiveScreen==="search"} targetLink={"/search"}/>
                 <IconText iconName={"icomoon-free:books"} displayText={"Library"} active={curActiveScreen==="library"}/>
                 <IconText iconName={"material-symbols:library-music-sharp"} displayText={"My Music"} targetLink={"/mymusic"} active={curActiveScreen==="mymusic"}/>
                 </div>
