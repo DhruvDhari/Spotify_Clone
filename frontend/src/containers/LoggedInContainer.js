@@ -5,10 +5,13 @@ import TextWithHover from "../components/shared/TextWithHover";
 import {Howl,Howler} from "howler";
 import { Children, useContext, useEffect, useLayoutEffect, useRef, useState } from "react";
 import songContext from "../context/songContext";
+import CreatePlaylistModal from "../modals/CreatePlaylistModal";
 // import { useNavigate } from "react-router-dom";
 
 
 const LoggedInContainer=({children,curActiveScreen})=>{
+
+    const [createPlaylistModalOpen,setCreatePlaylistModalOpen]= useState(false);
     // const navigate=useNavigate();
     const {currentSong,setCurrentSong,soundPlayed,setSoundPlayed,isPaused,setIsPaused}=useContext(songContext);
 
@@ -64,9 +67,14 @@ const playSound=()=>{
         }
     };
 
+    
     return(
         <>
+        
         <div className="h-full w-full bg-app-black">
+            {createPlaylistModalOpen &&<CreatePlaylistModal closeModal={()=>{
+                setCreatePlaylistModalOpen(false);
+            }} />}
             <div className={`${currentSong?"h-9/10":"h-full"} w-full flex`}>
 
             <div className="left h-full w-1/5 bg-black flex flex-col justify-between pb-10">
@@ -78,12 +86,15 @@ const playSound=()=>{
                 <div className="py-4">
                 <IconText iconName={"material-symbols:home"} displayText={"Home"} active={curActiveScreen==="home"} targetLink={"/home"} />
                 <IconText iconName={"material-symbols:search-rounded"} displayText={"Search"} active={curActiveScreen==="search"} targetLink={"/search"}/>
-                <IconText iconName={"icomoon-free:books"} displayText={"Library"} active={curActiveScreen==="library"}/>
+                <IconText iconName={"icomoon-free:books"} displayText={"Library"} active={curActiveScreen==="library"} targetLink={"/library"}/>
                 <IconText iconName={"material-symbols:library-music-sharp"} displayText={"My Music"} targetLink={"/mymusic"} active={curActiveScreen==="mymusic"}/>
                 </div>
 
                 <div className="pt-4">
-                <IconText iconName={"material-symbols:add-box"} displayText={"Create Playlist"}/>
+                <IconText iconName={"material-symbols:add-box"} displayText={"Create Playlist"}
+                onClick={()=>{
+                    setCreatePlaylistModalOpen(true);
+                }}/>
                 <IconText iconName={"mdi:cards-heart"} displayText={"Liked Songs"}/>
                 </div>
 
@@ -103,7 +114,7 @@ const playSound=()=>{
             </div>
 
             <div className="right h-full w-4/5 bg-app-black overflow-auto">
-                <div className="navbar w-full h-1/10 bg-black bg-opacity-30 flex items-center justify-end">
+                <div className="navbar w-full h-1/10 bg-black bg-opacity-30 flex items-center justify-end ">
                     <div className="w-1/2 flex h-full ">
                         <div className="w-2/3 flex justify-around items-center">
                         <TextWithHover displayText={"Premium"}/>
@@ -134,7 +145,7 @@ const playSound=()=>{
             {
                 currentSong &&(
 
-                    <div className=" w-full  bg-black bg-opacity-30 text-white flex px-2 items-center">
+                    <div className=" w-full  bg-black bg-opacity-30 text-white flex px-2 items-center h-1/10 ">
 
                 <div className="w-1/4 flex items-center ">
                 <img src={currentSong.thumbnail} alt="phi" className="h-14 w-14 rounded " />
@@ -149,11 +160,26 @@ const playSound=()=>{
                         <Icon icon="mdi:skip-previous-outline"  fontSize={30} className="cursor-pointer text-gray-500 hover:text-white"/>
                         <Icon icon={isPaused?"ic:baseline-play-circle":"ic:baseline-pause-circle"}  fontSize={50} className="cursor-pointer text-gray-500 hover:text-white" onClick={togglePlayPause}/>
                         <Icon icon="mdi:skip-next-outline"  fontSize={30} className="cursor-pointer text-gray-500 hover:text-white"/>
-                        <Icon icon="ic:twotone-repeat"  fontSize={30} className="cursor-pointer text-gray-500 hover:text-white"/>
+                        <Icon icon="ic:twotone-repeat"  fontSize={30} className="cursor-pointer text-gray-500 hover:text-white"
+                        />
                     </div>
-                    <div className="">progress bar</div>
+                    
+                    {/* <div className="">progress bar</div> */}
                 </div>
-                <div className="w-1/4 flex justify-end">
+                <div className="w-1/4 flex justify-end pr-4 space-x-4 items-center">
+                <Icon
+                            icon="ic:round-playlist-add"
+                            fontSize={30}
+                            className="cursor-pointer text-gray-500 hover:text-white"
+                            // onClick={() => {
+                            //     setAddToPlaylistModalOpen(true);
+                            // }}
+                        />
+                        <Icon
+                            icon="ph:heart-bold"
+                            fontSize={25}
+                            className="cursor-pointer text-gray-500 hover:text-white"
+                        />
                 </div>
                 
 
