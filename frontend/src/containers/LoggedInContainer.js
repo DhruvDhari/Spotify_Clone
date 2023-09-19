@@ -6,12 +6,15 @@ import {Howl,Howler} from "howler";
 import { Children, useContext, useEffect, useLayoutEffect, useRef, useState } from "react";
 import songContext from "../context/songContext";
 import CreatePlaylistModal from "../modals/CreatePlaylistModal";
+import AddToPlaylistModal from "../modals/AddToPlaylistModal";
+import { makeAuthenticatedPOSTRequest } from "../utils/serverHelpers";
 // import { useNavigate } from "react-router-dom";
 
 
 const LoggedInContainer=({children,curActiveScreen})=>{
 
     const [createPlaylistModalOpen,setCreatePlaylistModalOpen]= useState(false);
+    const [addToPlaylistModalOpen,setAddPlaylistModalOpen]= useState(false);
     // const navigate=useNavigate();
     const {currentSong,setCurrentSong,soundPlayed,setSoundPlayed,isPaused,setIsPaused}=useContext(songContext);
 
@@ -67,6 +70,16 @@ const playSound=()=>{
         }
     };
 
+    const addSongToPlaylist =async(playlistId)=>{
+        const songId = currentSong._id;
+        const payload={playlistId,songId};
+
+        const response =await makeAuthenticatedPOSTRequest("/playlist/add/song",payload);
+
+        if(response._id){
+            setAddPlaylistModalOpen(false);
+        }
+    };
     
     return(
         <>
@@ -75,6 +88,16 @@ const playSound=()=>{
             {createPlaylistModalOpen &&<CreatePlaylistModal closeModal={()=>{
                 setCreatePlaylistModalOpen(false);
             }} />}
+
+           {addToPlaylistModalOpen &&(
+            <AddToPlaylistModal closeModal={()=>{
+                setAddPlaylistModalOpen(false);
+            }}
+            addSongToPlaylist={addSongToPlaylist}
+            />
+           )}
+
+
             <div className={`${currentSong?"h-9/10":"h-full"} w-full flex`}>
 
             <div className="left h-full w-1/5 bg-black flex flex-col justify-between pb-10">
@@ -123,8 +146,9 @@ const playSound=()=>{
                     <div className="h-1/2 border-r border-white "></div>
                         </div>
                     
-                    <div className="w-1/3 flex justify-around h-full items-center">
-                    <TextWithHover displayText={"Upload Song "} />
+                    <div className="w-1/3 flex justify-between h-full items-center mr-5">
+                    <IconText displayText={"Upload Song"} active={curActiveScreen==="uploadsong"} targetLink={"/uploadSong"} />
+                    
                     <div className=" bg-white w-10 h-10 flex items-center justify-center rounded-full font-semibold cursor-pointer">
                         DD
                     </div>
@@ -171,9 +195,9 @@ const playSound=()=>{
                             icon="ic:round-playlist-add"
                             fontSize={30}
                             className="cursor-pointer text-gray-500 hover:text-white"
-                            // onClick={() => {
-                            //     setAddToPlaylistModalOpen(true);
-                            // }}
+                            onClick={() => {
+                                setAddPlaylistModalOpen(true);
+                            }}
                         />
                         <Icon
                             icon="ph:heart-bold"

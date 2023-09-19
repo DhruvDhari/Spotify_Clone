@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import LoggedInContainer from "../containers/LoggedInContainer";
 import { makeAuthenticatedGETRequest } from "../utils/serverHelpers";
+import { useNavigate } from "react-router-dom";
 
 
 
 const Library=()=>{
+   
     const [myPlaylists,setMyPlaylists]=useState([]);
     useEffect(()=>{
         const getData=async()=>{
@@ -21,7 +23,9 @@ const Library=()=>{
 
             <div className="py-4 grid gap-5 grid-cols-5 ">
                 {myPlaylists.map(item=>{
-                    return <Card key={JSON.stringify(item)} title={item.name}  imgUrl={item.thumbnail} />
+                    return <Card key={JSON.stringify(item)} title={item.name}  imgUrl={item.thumbnail} 
+                    playlistId={item._id}
+                    />
                 })}
             </div>
 
@@ -29,9 +33,12 @@ const Library=()=>{
     );
 };
 
-const Card =({title,imgUrl}) =>{
+const Card =({title,imgUrl,playlistId}) =>{
+    const navigate=useNavigate();
     return(
-        <div className="bg-black bg-opacity-40 w-full px-3 pt-2 pb-4 rounded-lg cursor-pointer">
+        <div className="bg-black bg-opacity-40 w-full px-3 pt-2 pb-4 rounded-lg cursor-pointer" onClick={()=>{
+            navigate("/playlist/"+playlistId);
+        }}>
             <div className="pt-2 pb-3 h-4/5 ">
                 <img src={imgUrl} className="rounded-md w-full h-full " alt="label" />
             </div>

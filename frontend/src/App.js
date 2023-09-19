@@ -11,6 +11,7 @@ import songContext from "./context/songContext";
 import { useState } from "react";
 import SearchPageComponent from "./routes/SearchPage";
 import Library from "./routes/Library";
+import SinglePlatlistView from "./routes/SinglePlaylistView";
 
 function App() {
   const[currentSong,setCurrentSong]=useState(null);
@@ -36,6 +37,7 @@ function App() {
               <Route path="/mymusic" element={<MyMusic />} />
               <Route path="/search" element={<SearchPageComponent/>} />
               <Route path="/library" element={<Library/>} />
+              <Route path="/playlist/:playlistId" element={<SinglePlatlistView/> } />
 
               <Route path="*" element={<Navigate to="/home" />} />
               </Routes>

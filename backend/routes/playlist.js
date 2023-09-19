@@ -22,7 +22,10 @@ router.post("/create",passport.authenticate("jwt",{session:false}),async(req,res
 
 router.get("/get/playlist/:playlistId",passport.authenticate("jwt",{session:false}),async(req,res)=>{
     const playlistId=req.params.playlistId;
-    const playlist =await Playlist.findOne({_id :playlistId});
+    const playlist =await Playlist.findOne({_id :playlistId}).populate({path:"songs",
+populate:{
+    path:"artist"
+}});
 
     if(!playlist){
         return res.status(301).json({err:"Invalid ID"});
