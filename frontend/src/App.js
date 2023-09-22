@@ -29,7 +29,7 @@ function App() {
          //this provider basically helps to create a context that is globally same..
             <songContext.Provider value={{currentSong,setCurrentSong,soundPlayed,setSoundPlayed,isPaused,setIsPaused}}>
                <Routes>
-              <Route path="/" element={<HelloComponent />} />
+              
 
               <Route path="/home" element={<LoggedInHomeComponent />} />
 
@@ -60,8 +60,5 @@ function App() {
   );
 }
 
-const HelloComponent = () => {
-  return <div>Ye hai hello component</div>;
-};
 
 export default App;
