@@ -37,21 +37,27 @@ mongoose.connect("mongodb+srv://dmaster:"+process.env.MONGO_PASSWORD+"@cluster0.
     console.log("Error while connecting to Mongo :",err);
 });
 
-// app.get('/',(req,res)=>{
-//     res.send("hello bhai");
-// })
+
 
 // ============ deployment ================
 const __dirname1=path.resolve();
+console.log(__dirname1);
+try{
 
-app.use(express.static(path.join(__dirname1,"../frontend/build")))
+    app.use(express.static(path.join(__dirname1,"../frontend/build"))) 
+    console.log(path.join(__dirname1,"../frontend/build"))
+    
+    app.get('*',(req,res)=>{
+        res.sendFile(path.resolve(__dirname1,"../","frontend","build","index.html"))
+    })
+    console.log(path.resolve(__dirname1,"../","frontend","build","index.html"))
+    
+}catch{
 
-
-
-app.get('*',(req,res)=>{
-    res.sendFile(path.resolve(__dirname1,"../","frontend","build","index.html"))
-})
-
+    app.get('/',(req,res)=>{
+        res.send("I am inside catch");
+    })
+}
 
 
 
