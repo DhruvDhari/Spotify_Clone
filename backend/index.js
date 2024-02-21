@@ -14,6 +14,7 @@ const authRoutes =require("./routes/auth");
 const songRoutes=require("./routes/song");
 const playlistRoutes=require("./routes/playlist");
 const cors =require("cors");
+const path = require("path");
 
 
 
@@ -36,9 +37,25 @@ mongoose.connect("mongodb+srv://dmaster:"+process.env.MONGO_PASSWORD+"@cluster0.
     console.log("Error while connecting to Mongo :",err);
 });
 
-app.get('/',(req,res)=>{
-    res.send("hello bhai");
+// app.get('/',(req,res)=>{
+//     res.send("hello bhai");
+// })
+
+// ============ deployment ================
+const __dirname1=path.resolve();
+
+app.use(express.static(path.join(__dirname1,"../frontend/build")))
+
+console.log(path.join(__dirname1,"../frontend/build"))
+
+app.get('*',(req,res)=>{
+    res.sendFile(path.resolve(__dirname1,"frontend","build","index.html"))
 })
+
+console.log(path.resolve(__dirname1,"../","frontend","build","index.html"))
+
+
+// ============ deployment ================
 
 app.use("/auth",authRoutes);
 app.use("/song",songRoutes);
